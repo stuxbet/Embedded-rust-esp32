@@ -1,0 +1,6 @@
+[mqtt]
+mqtt_user = " "
+mqtt_pass = " "
+mqtt_host = " "
+wifi_ssid = " "
+wifi_psk = " "
