@@ -134,3 +134,34 @@ pub enum EventCode {
     TempHWError = 37,        // Temperature Hardware Error
 }
 
+
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct RealtimeStatusWrapper {
+    pub RealtimeStatus: RealtimeStatus, // Ensures "RealtimeStatus" is the top-level key
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct RecipeWrapper {
+    pub Recipe: Recipe, // Ensures "Recipe" is the top-level key
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct GroupWrapper {
+    pub Group: Group, // Ensures "Group" is the top-level key
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct ControllerConfigWrapper {
+    pub ControllerConfig: ControllerConfig, // Ensures "ControllerConfig" is the top-level key
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct LogEventWrapper {
+    pub LogEvent: LogEvent, // Ensures "LogEvent" is the top-level key
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct OperationCounterWrapper {
+    pub OperationCounter: OperationCounter, // Ensures "OperationCounter" is the top-level key
+}

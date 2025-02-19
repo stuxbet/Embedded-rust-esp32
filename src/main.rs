@@ -53,16 +53,18 @@ fn main() -> Result<()> {
         eVal4: 0,   // Not used
     };
 
-    let rts = RealtimeStatus{
-        fryST: FryingState::RecipeComplete as u8,
-        prbT: 110,
-        prbT10: 1102,
-        cjT: 70,
-        cjT10: 708,
-        curRcp: 43,
-        curGrp: 1,
-        curSP: 450,
-        curLvl: 17,
+    let rts = RealtimeStatusWrapper {
+        RealtimeStatus: RealtimeStatus {
+            fryST: FryingState::Heating as u8,
+            prbT: 300,
+            prbT10: 3000,
+            cjT: 250,
+            cjT10: 2500,
+            curRcp: 5,
+            curGrp: 1,
+            curSP: 375,
+            curLvl: 16,
+        },
     };
 
     let json = to_string(&rts).unwrap();
