@@ -17,7 +17,7 @@ pub struct RealtimeStatus {
 // Recipe Structure
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Recipe {
-    pub rName: String,  // Recipe Name (19 characters + null terminator)
+    pub rName: String,  // Recipe Name (19 characters + /0 null terminator)
     pub rTime: u16,     // Recipe Time (60-28800 seconds)
     pub rTemp: u16,     // Recipe Temp (200-525 degrees F)
     pub rIcon: u8,      // Recipe Icon Index
@@ -30,7 +30,7 @@ pub struct Recipe {
 // Group Structure
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Group {
-    pub gName: String,  // Group Name (11 characters + null terminator)
+    pub gName: String,  // Group Name (11 characters + /0 null terminator)
     pub gIcon: u16,     // Group Icon Index
     pub gSpare: u16,    // Spare (Unused)
     pub gCRC: u32,      // Checksum (32-bit CRC)
@@ -84,7 +84,7 @@ pub struct OperationCounter {
     pub oCRC: u32,      // Checksum (32-bit CRC)
 }
 
-// Enum for Frying State
+
 #[derive(Serialize, Deserialize, Debug)]
 pub enum FryingState {
     Idle = 0,            // Fryer idle, no heating
@@ -104,6 +104,7 @@ pub enum UserLevel {
     Technician = 18,   // Technician
     Factory = 19,      // Factory
 }
+
 
 // Enum for Event Codes (no associated values since they're stored in LogEvent)
 #[repr(u16)]
@@ -132,3 +133,4 @@ pub enum EventCode {
     FirmwareUpdate = 35,     // Firmware Update
     TempHWError = 37,        // Temperature Hardware Error
 }
+

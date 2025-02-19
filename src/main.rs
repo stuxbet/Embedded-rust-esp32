@@ -53,7 +53,19 @@ fn main() -> Result<()> {
         eVal4: 0,   // Not used
     };
 
-    let json = to_string(&event).unwrap();
+    let rts = RealtimeStatus{
+        fryST: FryingState::RecipeComplete as u8,
+        prbT: 110,
+        prbT10: 1102,
+        cjT: 70,
+        cjT10: 708,
+        curRcp: 43,
+        curGrp: 1,
+        curSP: 450,
+        curLvl: 17,
+    };
+
+    let json = to_string(&rts).unwrap();
     log::info!("json:::{}", json);
 
 
