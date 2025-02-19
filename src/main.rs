@@ -16,8 +16,13 @@ use log::info;
 use mqtt_messages::hello_topic;
 use rgb_led::{RGB8, WS2812RMT};
 use shtcx::{self, shtc3, PowerMode};
+use types::*;
 use std::{thread::sleep, time::Duration};
 use wifi::wifi;
+use serde::{Serialize, Deserialize};
+use serde_json::to_string;
+pub mod types; 
+
 
 const UUID: &str = get_uuid::uuid();
 
@@ -38,6 +43,19 @@ pub struct Config {
 fn main() -> Result<()> {
     esp_idf_svc::sys::link_patches();
     esp_idf_svc::log::EspLogger::initialize_default();
+
+
+    let event = LogEvent {
+        eCode: EventCode::FirmwareUpdate as u16,
+        eVal1: 17,  // User level
+        eVal2: 102, // Current version
+        eVal3: 103, // New version
+        eVal4: 0,   // Not used
+    };
+
+    let json = to_string(&event).unwrap();
+    log::info!("json:::{}", json);
+
 
     let peripherals = Peripherals::take().unwrap();
     let sysloop = EspSystemEventLoop::take()?;
@@ -80,16 +98,11 @@ fn main() -> Result<()> {
 
     let mqtt_config = MqttClientConfiguration::default();
 
-    // Your Code:
-
-    // 1. Create a client with default configuration and empty handler
     let mut client = EspMqttClient::new_cb(&broker_url, &mqtt_config, move |_message_event| {
         // ... your handler code here - leave this empty for now
         // we'll add functionality later in this chapter
     })?;
 
-    // 2. publish an empty hello message
-    // let payload: &[u8] = &[];
     // client.enqueue(&hello_topic(UUID), QoS::AtLeastOnce, true, payload)?;
     let mut is_green = true; // Track color state
     loop {
